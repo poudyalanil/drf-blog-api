@@ -22,45 +22,6 @@ def check_api(request):
         }
     return JsonResponse(resp)
 
-@api_view(['GET','POST'])
-def blog_list(request):
-    if request.method=='GET':
-        blogs = Blog.objects.all()
-        serializer = Blog_Serializer(blogs,many=True)
-        return Response(serializer.data)
-    elif  request.method=='POST':
-        serializer = Blog_Serializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status = status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET','PUT','DELETE'])
-def single_blog(request,pk):
-    try:
-        blog = Blog.objects.get(pk=pk)
-    except Blog.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == 'GET':
-        serializer = Blog_Serializer(blog)
-        return Response(serializer.data)
-    elif request.method =='PUT':
-        serializer = Blog_Serializer(blog,data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    elif request.method =='DELETE':
-        blog.delete()
-        return HttpResponse(status = status.HTTP_410_GONE)
-
-
-
 class BlogView(APIView):
     def get(self,request):
         blogs = Blog.objects.all()
