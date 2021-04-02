@@ -50,12 +50,12 @@ def single_blog(request,pk):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data,status=401)
+            return JsonResponse(serializer.data,status=201)
         else:
             return JsonResponse(serializer.errors,status=400)
     elif request.method =='DELETE':
         blog.delete()
-        return JsonResponse(status = 410)
+        return HttpResponse(status = 410)
 
 
         
