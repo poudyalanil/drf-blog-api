@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import  Response
 from rest_framework import  status
+from rest_framework.views import APIView
 
 # Create your views here.
 def check_api(request):
@@ -59,6 +60,19 @@ def single_blog(request,pk):
         return HttpResponse(status = status.HTTP_410_GONE)
 
 
+
+class BlogView(APIView):
+    def get(self,request):
+        blogs = Blog.objects.all()
+        serializer = Blog_Serializer(blogs,many=True)
+        return Response(serializer.data)
         
+    def post(self,request):
+        serializer = Blog_Serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status = status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 
