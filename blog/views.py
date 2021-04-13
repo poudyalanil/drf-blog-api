@@ -45,10 +45,10 @@ def single_blog(request,pk):
         serializer = Blog_Serializer(blog)
         return JsonResponse(serializer.data,safe=False)
     elif request.method =='PUT':
-        data = JSONParser.parse(request)
+        data = JSONParser().parse(request)
         serializer = Blog_Serializer(blog,data=data)
 
-        if serializer.is_valid:
+        if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=401)
         else:
@@ -56,7 +56,7 @@ def single_blog(request,pk):
     elif request.method =='DELETE':
         blog.delete()
         return JsonResponse(status = 410)
-        
+
 
         
 

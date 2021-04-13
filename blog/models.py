@@ -25,18 +25,10 @@ class Blog(models.Model):
     title  = models.CharField(max_length=255,default=None,blank=False,null=False)
     content = models.TextField(blank=False,default=None)
     author = models.CharField(max_length=255,default="Anonymus",blank=True,null=False)
-    slug= models.SlugField(max_length=255,default=title,unique=True)
     feature_image = CloudinaryField(null=True,blank=True)
 
     def __str__(self):
         return self.title
-
-
-    def save(self, *args, **kwargs):
-            self.slug = slugify(self.title) # set the slug explicitly
-            super(Blog, self).save(*args, **kwargs) # call Django's save()
-
-# class Comment(models.Model):
 
 
 
