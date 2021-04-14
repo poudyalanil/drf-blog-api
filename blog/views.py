@@ -33,5 +33,31 @@ def blog_list(request):
             return JsonResponse(serializer.data,status = 201)
         else:
             return JsonResponse(serializer.errors,status = 400)
+
+@csrf_exempt
+def single_blog(request,pk):
+    try:
+        blog = Blog.objects.get(pk=pk)
+    except Blog.DoesNotExist:
+        return HttpResponse(status=404)
+    
+    if request.method == 'GET':
+        serializer = Blog_Serializer(blog)
+        return JsonResponse(serializer.data,safe=False)
+    elif request.method =='PUT':
+        data = JSONParser.parse(request)
+        serializer = Blog_Serializer(blog,data=data)
+
+        if serializer.is_valid:
+            serializer.save()
+            return JsonResponse(serializer.data,status=401)
+        else:
+            return JsonResponse(serializer.errors,status=400)
+    elif request.method =='DELETE':
+        blog.delete()
+        return JsonResponse(status = 410)
         
+
+        
+
 
