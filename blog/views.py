@@ -6,6 +6,7 @@ from datetime import  datetime
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from .serializers import  Blog_Serializer,Category_Serializer,Tag_Serializer
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def check_api(request):
@@ -17,6 +18,7 @@ def check_api(request):
         }
     return JsonResponse(resp)
 
+@csrf_exempt
 def blog_list(request):
     if request.method=='GET':
         blogs = Blog.objects.all()
