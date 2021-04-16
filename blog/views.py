@@ -18,11 +18,11 @@ def check_api(request):
     return JsonResponse(resp)
 
 def blog_list(request):
-    if request.get:
+    if request.method=='GET':
         blogs = Blog.objects.all()
         serializer = Blog_Serializer(blogs,many=True)
         return JsonResponse(serializer.data,safe=False)
-    elif  request.post:
+    elif  request.method=='POST':
         data = JSONParser().parse(request)
         serializer = Blog_Serializer(data=data)
 
