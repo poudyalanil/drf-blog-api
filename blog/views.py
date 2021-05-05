@@ -9,7 +9,8 @@ def check_api(request):
         'date':datetime.now,
         "api_name":"drf-api",
         'version':"0.01",
-        'status':"good"
+        'status':"good",
+        'country':'Nepal',
         
         }
     return JsonResponse(resp)
