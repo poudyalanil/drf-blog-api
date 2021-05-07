@@ -77,8 +77,15 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd8j34jslmthtq2',
+        'USER': 'byaucqosqwntpm',
+        'PASSWORD': '5e2f889280bf6b9322518bfacc6cd77ea318fe055733faea9c6f89a52c2b5445',
+        'HOST': 'ec2-54-167-168-52.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'TEST': {
+            'NAME': 'd8j34jslmthtq2',
+        },
     }
 }
 
@@ -125,3 +132,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import cloudinary
+
+cloudinary.config( 
+  cloud_name = "ap-blog-application-drf", 
+  api_key = "968243356372576", 
+  api_secret = "aYIQKpUIrEPZaJPIPbQKjdg-BLc" 
+)
