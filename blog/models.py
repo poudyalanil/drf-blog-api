@@ -1,5 +1,5 @@
 from django.db import models
-from cludinary.models import CloudinaryField
+from cloudinary.models import CloudinaryField
 from django.utils.text import  slugify
 
 class Category(models.Model):
@@ -17,7 +17,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.tag
-        
+
 class Blog(models.Model):
     date_updated= models.DateTimeField(auto_now=True)
     tag = models.ManyToManyField(Tag)
@@ -26,7 +26,7 @@ class Blog(models.Model):
     content = models.TextField(blank=False,default=None)
     author = models.CharField(max_length=255,default="Anonymus",blank=True,null=False)
     slug= models.SlugField(max_length=255,default=title,unique=True)
-    feature_image = CludinaryField(null=True,blank=True)
+    feature_image = CloudinaryField(null=True,blank=True)
 
     def __str__(self):
         return self.title
