@@ -2,7 +2,7 @@ asgiref==3.3.4
 autopep8==1.5.4
 certifi==2020.12.5
 cloudinary==1.25.0
-Django==3.2.2
+Django==3.2.12
 djangorestframework==3.12.4
 psycopg2==2.8.6
 pycodestyle==2.6.0
